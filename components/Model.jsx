@@ -5,7 +5,7 @@ import { IoMdClose } from "react-icons/io";
 const Model = ({ isOpen, onChange, title, children, description, type }) => {
   const modalClasses =
     type === "about"
-      ? "fixed border border-gray-200 top-[6.25%] shadow-lg left-[10.5%] w-[80%] h-[90%] bg-white p-[25px] focus:outline-none custom-scrollbar overflow-auto rounded-md z-50"
+      ? "fixed border border-gray-200 bg-slate-50 top-[4.25%] shadow-lg left-[10.5%] w-[80%] h-[95%] bg-white p-[25px] focus:outline-none custom-scrollbar overflow-auto rounded-md z-50"
       : "fixed border border-gray-200 top-[50%] left-[50%] max-h-full h-full md:h-auto md:max-h-[85vh] w-full md:w-[90vw] md:max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-md bg-white p-[25px] focus:outline-none custom-scrollbar overflow-auto z-50";
 
   return (

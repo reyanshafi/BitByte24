@@ -1,248 +1,108 @@
+import React, { useCallback } from "react";
 import Model from "./Model";
 import useAboutModel from "../hooks/useAboutModel";
-import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import eventInfo from "../constants";
+import Image from "next/image";
+
 const About = () => {
   const { isOpen, onClose } = useAboutModel();
-  const { control, watch, handleSubmit } = useForm();
-  const [totalAmount, setTotalAmount] = useState(0);
 
-  // Registration fees for each type
-  const registrationFees = {
-    single: 199,
-    duo: 349,
-    squad: 649,
-  };
+  // Memoized function to prevent re-creation on each render
+  const handleOnChange = useCallback(
+    (open) => {
+      if (!open) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
-  // Watch for changes in registration type and events
-  const selectedType = watch("registrationType", "single");
-  const selectedEvents = watch("events", []);
-
-  // Function to calculate total amount
-  const calculateTotalAmount = () => {
-    const baseAmount = registrationFees[selectedType] || 0;
-    const eventCount = selectedEvents.length;
-
-    let total = baseAmount;
-    let previousAmount = baseAmount;
-
-    // Apply the discount for additional events
-    for (let i = 1; i < eventCount; i++) {
-      const discountedPrice = previousAmount * 0.9;
-      total += discountedPrice;
-      previousAmount = discountedPrice;
-    }
-
-    return total;
-  };
-
-  // Handle form submission
-  const onSubmit = (data) => {
-    const total = calculateTotalAmount();
-    setTotalAmount(total);
-    alert(`Registration successful! Total amount: $${total.toFixed(2)}`);
-  };
-
-  const onChange = (open) => {
-    if (!open) {
-      onClose();
-    }
-  };
   return (
     <Model
-      title="About BitByte"
-      description="Technical event in Islamic University of Science & Technology, where students from different branches are compete to solve real-world problems."
-      onChange={onChange}
+      title=""
+      description=""
+      onChange={handleOnChange}
       isOpen={isOpen}
       type="about"
     >
-      {/* <h2>Activities</h2>
-      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-          <img
-            className="rounded-t-lg"
-            src="/docs/images/blog/image-1.jpg"
-            alt=""
-          />
-        </a>
-        <div className="p-5">
-          <a href="#">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Noteworthy technology acquisitions 2021
-            </h5>
-          </a>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header Section */}
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-blue-400 mb-4">
+            Welcome to the BitByte Event 🎉
+          </h1>
+          <p className="text-lg text-gray-700 dark:text-gray-300">
+            Explore the most exciting and engaging activities curated just for
+            you!
           </p>
-          <a
-            href="#"
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Read more
-            <svg
-              className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-          <img
-            className="rounded-t-lg"
-            src="/docs/images/blog/image-1.jpg"
-            alt=""
-          />
-        </a>
-        <div className="p-5">
-          <a href="#">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Noteworthy technology acquisitions 2021
-            </h5>
-          </a>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
-          <a
-            href="#"
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Read more
-            <svg
-              className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </a>
-        </div>
-      </div> */}
+        </header>
 
-      {/* Registration Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-4">
-        <h2 className="text-lg font-bold">Event Registration</h2>
-
-        {/* Registration Type Selection */}
-        <div>
-          <label>Registration Type:</label>
-          <Controller
-            control={control}
-            name="registrationType"
-            defaultValue="single"
-            render={({ field }) => (
-              <select {...field} className="border p-2 rounded">
-                <option value="single">Single - $199</option>
-                <option value="duo">Duo - $349</option>
-                <option value="squad">Squad - $649</option>
-              </select>
-            )}
-          />
-        </div>
-
-        {/* Events Selection */}
-        <div>
-          <label>Events:</label>
-          <Controller
-            control={control}
-            name="events"
-            defaultValue={[]}
-            render={({ field }) => (
-              <div>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    value="event1"
-                    {...field}
-                    onChange={(e) =>
-                      field.onChange(
-                        e.target.checked
-                          ? [...field.value, e.target.value]
-                          : field.value.filter((val) => val !== e.target.value)
-                      )
-                    }
-                  />
-                  Event 1
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    value="event2"
-                    {...field}
-                    onChange={(e) =>
-                      field.onChange(
-                        e.target.checked
-                          ? [...field.value, e.target.value]
-                          : field.value.filter((val) => val !== e.target.value)
-                      )
-                    }
-                  />
-                  Event 2
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    value="event3"
-                    {...field}
-                    onChange={(e) =>
-                      field.onChange(
-                        e.target.checked
-                          ? [...field.value, e.target.value]
-                          : field.value.filter((val) => val !== e.target.value)
-                      )
-                    }
-                  />
-                  Event 3
-                </label>
-                {/* Repeat for up to 8 events */}
+        {/* Activities Section */}
+        <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+            Activities
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {eventInfo.map((event, index) => (
+              <div
+                key={index} // Unique key for each event
+                className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow dark:bg-gray-800 dark:border-gray-700"
+              >
+                <Image
+                  className="rounded-t-lg w-full h-48 object-cover"
+                  src={event.coverImage}
+                  alt={event.name}
+                  width={400}
+                  height={200}
+                  loading="lazy"
+                />
+                <div className="p-6">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {event.name}
+                  </h5>
+                  <p className="font-normal text-gray-700 dark:text-gray-400">
+                    {event.discription}
+                  </p>
+                  <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
+                    {`Team size: ${event.teamSize}`}
+                  </p>
+                  <a
+                    href="#"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-700"
+                  >
+                    Register
+                    <svg
+                      className="rtl:rotate-180 w-4 h-4 ms-2"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M1 5h12m0 0L9 1m4 4L9 9"
+                      />
+                    </svg>
+                  </a>
+                </div>
               </div>
-            )}
-          />
-        </div>
+            ))}
+          </div>
+        </section>
 
-        {/* Calculate Total Button */}
-        <button
-          type="button"
-          onClick={() => setTotalAmount(calculateTotalAmount())}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Calculate Total
-        </button>
-
-        {/* Display Total Amount */}
-        <div className="text-lg font-semibold">
-          Total Amount: ${totalAmount.toFixed(2)}
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="bg-green-500 text-white py-2 px-4 rounded"
-        >
-          Register
-        </button>
-      </form>
+        {/* Organized By Section */}
+        <section className="text-center mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+            Organized by Team CSE 🏅
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">
+            Join us for an unforgettable learning experience.
+          </p>
+        </section>
+      </div>
     </Model>
   );
 };

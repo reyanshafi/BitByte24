@@ -16,7 +16,9 @@ const Navbar = () => {
         >
           <Image
             src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8"
+            className="h-8 "
+            width={30}
+            height={30}
             alt="Flowbite Logo"
           />
           <span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">
