@@ -33,11 +33,12 @@ const Hero = () => {
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col space-around items-center mt-3 w-full">
         <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base text-center sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto leading-relaxed">
-          "BitByte" is a dynamic university event celebrating the world of
-          computer science! Dive into a blend of tech talks, coding challenges,
-          and hands-on workshops. Whether you're a coding enthusiast, tech
-          innovator, or just curious about the digital world, BitByte is your
-          gateway to explore, innovate, and connect with like-minded techies.
+          &quot;BitByte&quot; is a dynamic university event celebrating the
+          world of computer science! Dive into a blend of tech talks, coding
+          challenges, and hands-on workshops. Whether you&apos;re a coding
+          enthusiast, tech innovator, or just curious about the digital world,
+          BitByte is your gateway to explore, innovate, and connect with
+          like-minded techies.
         </p>
         <CountdownTimer />
       </div>
