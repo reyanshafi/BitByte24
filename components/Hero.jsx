@@ -45,7 +45,7 @@ const Hero = () => {
       <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 mt-5 pointer-events-auto">
         <button
           onClick={handleGetStarted}
-          className="cursor-pointer inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:shadow-md hover:shadow-blue-900 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 z-20"
+          className="cursor-pointer inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:shadow-md hover:shadow-blue-900 hover:bg-blue-600  dark:focus:ring-blue-900 z-20"
         >
           Register Now
           <svg
@@ -54,19 +54,11 @@ const Hero = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
+          ></svg>
         </button>
         <button
           onClick={onClick}
-          className="cursor-pointer inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center hover:shadow-md hover:shadow-gray-900 text-black rounded-lg border border-black hover:bg-gray-100 focus:ring-4 focus:ring-gray-400 z-20"
+          className="cursor-pointer inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center hover:shadow-md hover:shadow-gray-900 text-black rounded-lg border border-black hover:bg-gray-100  z-20"
         >
           About BitByte
         </button>
