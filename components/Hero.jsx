@@ -4,35 +4,35 @@ import logo from "/assets/logo.webp";
 import { TypewriterEffectSmooth } from "../components/ui/typewriter-effect";
 import CountdownTimer from "../components/Counter";
 import useAboutModel from "../hooks/useAboutModel";
+import useTempGateway from "../hooks/useTempGateway";
 
 const Hero = () => {
   const aboutModel = useAboutModel();
+  const tempGateway = useTempGateway();
   const onClick = () => {
     return aboutModel.onOpen();
-    //handle click
   };
 
   const words = [
     { text: "Code." },
     { text: "Create." },
-    { text: "Connect." },
-    { text: "Conquer." },
-    { text: "BitByte!", className: "text-blue-500 dark:text-blue-500" },
+    { text: "Collaborate." },
+    { text: "BitByte!", className: "text-blue-500 dark:text-blue-500 " },
   ];
 
   const handleGetStarted = () => {
-    console.log("Get started clicked");
+    return tempGateway.onOpen();
   };
 
   return (
     <div className="relative flex flex-col items-center pt-1 z-10">
       <Image src={logo} width={300} height={200} alt="IUST logo" />
-      <p className="text-neutral-600 text-md text-semibold my-3 mx-auto leading-relaxed">
+      <p className="text-gray-800 dark:text-gray-300 text-md font-semibold my-3 mx-auto leading-relaxed">
         Presents
       </p>
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col space-around items-center mt-3 w-full">
-        <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base text-center sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto leading-relaxed">
+        <p className="text-gray-800 dark:text-gray-300 text-xs sm:text-base text-center sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto leading-relaxed">
           &quot;BitByte&quot; is a dynamic university event celebrating the
           world of computer science! Dive into a blend of tech talks, coding
           challenges, and hands-on workshops. Whether you&apos;re a coding
@@ -45,7 +45,7 @@ const Hero = () => {
       <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 mt-5 pointer-events-auto">
         <button
           onClick={handleGetStarted}
-          className="cursor-pointer inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:shadow-md hover:shadow-blue-900 hover:bg-blue-600  dark:focus:ring-blue-900 z-20"
+          className="cursor-pointer inline-flex justify-center items-center py-3 px-5 sm:py-4 sm:px-6 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:shadow-md hover:shadow-blue-900 hover:bg-blue-700 dark:focus:ring-blue-800 z-20"
         >
           Register Now
           <svg

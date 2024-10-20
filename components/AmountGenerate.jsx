@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 
 const AmountGenerate = () => {
   const { control, watch, handleSubmit } = useForm();
+
   const [totalAmount, setTotalAmount] = useState(0);
 
   // Registration fees for each type
