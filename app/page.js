@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <div className="main">
         <div className="gradient" />
-        <BackgroundBeams />
+        {/* <BackgroundBeams /> */}
         <div className="relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6">
           <Navbar />
           <Hero />

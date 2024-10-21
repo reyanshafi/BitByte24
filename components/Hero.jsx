@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import logo from "/assets/logo.webp";
+import logo from "../public/assets/logo.webp";
 import { TypewriterEffectSmooth } from "../components/ui/typewriter-effect";
 import CountdownTimer from "../components/Counter";
 import useAboutModel from "../hooks/useAboutModel";
@@ -30,7 +30,7 @@ const Hero = () => {
       <p className="text-gray-800 dark:text-gray-300 text-md font-semibold my-3 mx-auto leading-relaxed">
         Presents
       </p>
-      <TypewriterEffectSmooth words={words} />
+      {/* <TypewriterEffectSmooth words={words} /> */}
       <div className="flex flex-col space-around items-center mt-3 w-full">
         <p className="text-gray-800 dark:text-gray-300 text-xs sm:text-base text-center sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto leading-relaxed">
           &quot;BitByte&quot; is a dynamic university event celebrating the
