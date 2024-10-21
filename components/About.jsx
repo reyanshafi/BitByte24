@@ -91,7 +91,7 @@ const About = () => {
         </section>
 
         <section className="text-center mb-6">
-          <h2 className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-white">
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-800 ">
             Organized by Team CSE 🏅
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
