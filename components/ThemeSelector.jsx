@@ -5,6 +5,8 @@ const themes = [
   "Find the Keyword",
   "Mini Hackathon",
   "IoT Challenge",
+  "Gaming(Valorant)",
+  "Gaming(BGMI)",
   "Debate",
   "Quiz (Buzzer Round)",
   "Problem Solving",
