@@ -4,11 +4,13 @@ import logo from "../public/assets/logo.webp";
 import { TypewriterEffect } from "./ui/TypewriterEffect";
 import CountdownTimer from "../components/Counter";
 import useAboutModel from "../hooks/useAboutModel";
-import useTempGateway from "../hooks/useTempGateway";
+import useRegistrationModel from "../hooks/useRegistrationForm";
+import { MdEmojiEvents } from "react-icons/md";
+import { FaArrowRight } from "react-icons/fa";
 
 const Hero = () => {
   const aboutModel = useAboutModel();
-  const tempGateway = useTempGateway();
+  const registerForm = useRegistrationModel();
   const onClick = () => {
     return aboutModel.onOpen();
   };
@@ -21,11 +23,11 @@ const Hero = () => {
   ];
 
   const handleGetStarted = () => {
-    return tempGateway.onOpen();
+    return registerForm.onOpen();
   };
 
   return (
-    <div className="relative flex flex-col items-center pt-1 z-10">
+    <div className="relative flex flex-col items-center pt-1 z-10 md:mt-4">
       <Image src={logo} width={300} height={200} alt="IUST logo" />
       <p className="text-gray-800 dark:text-gray-300 text-md font-semibold my-3 mx-auto leading-relaxed">
         Presents
@@ -48,19 +50,18 @@ const Hero = () => {
           className="cursor-pointer inline-flex justify-center items-center py-3 px-5 sm:py-4 sm:px-6 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:shadow-md hover:shadow-blue-900 hover:bg-blue-700 dark:focus:ring-blue-800 z-20"
         >
           Register Now
-          <svg
-            className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          ></svg>
+          <span>
+            <FaArrowRight className="ml-2" size={20} />
+          </span>
         </button>
         <button
           onClick={onClick}
           className="cursor-pointer inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center hover:shadow-md hover:shadow-gray-900 text-black rounded-lg border border-black hover:bg-gray-100  z-20"
         >
           About BitByte
+          <span>
+            <MdEmojiEvents className="ml-2" size={20} />
+          </span>
         </button>
       </div>
     </div>

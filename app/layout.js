@@ -3,6 +3,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ModelProvider from "../providers/ModelProvider";
+import { RegistrationProvider } from "../lib/RegistrationContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,10 +29,12 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning={true}
       >
-        <ToastContainer />
-        <ModelProvider />
+        <RegistrationProvider>
+          <ToastContainer />
+          <ModelProvider />
 
-        {children}
+          {children}
+        </RegistrationProvider>
       </body>
     </html>
   );

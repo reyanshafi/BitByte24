@@ -99,3 +99,33 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-slideInUp {
+  animation: slideIn 1s ease-out forwards;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}

@@ -3,20 +3,19 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { toast } from "react-toastify";
 import { supabase as supabaseClient } from "../lib/supabaseClient";
 import Model from "./Model";
-import { useRouter } from "next/navigation";
 import useRegistrationModel from "../hooks/useRegistrationForm";
 import Spinner from "./Spinner";
 import InputField from "./InputField";
 import ThemeSelector from "./ThemeSelector";
 import { departments } from "../constants";
 import useTempGateway from "../hooks/useTempGateway";
+import { useRegistration } from "../lib/RegistrationContext";
 const RegisterForm = () => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onClose } = useRegistrationModel();
   const tempGateway = useTempGateway();
   const [totalAmount, setTotalAmount] = useState(199);
-
+  const { setRegistrationId, setEmail } = useRegistration();
   const {
     register,
     control,
@@ -136,55 +135,6 @@ const RegisterForm = () => {
     );
   };
 
-  const insertRegistration = async (values, defaultThemeId, totalAmount) => {
-    const { data, error } = await supabaseClient
-      .from("registrations")
-      .insert({
-        registration_type: values.registrationType,
-        default_theme_id: defaultThemeId,
-        amount: totalAmount,
-        payment_done: false,
-      })
-      .select("id")
-      .single();
-
-    if (error)
-      throw new Error(`Registration insertion failed: ${error.message}`);
-    return data.id;
-  };
-
-  const insertParticipants = async (participants, registrationId) => {
-    const { error } = await supabaseClient.from("participants").insert(
-      participants.map((participant) => ({
-        registration_id: registrationId,
-        fullname: participant.fullname,
-        email: participant.email,
-        student_id: participant.studentId,
-        phone: participant.phone,
-        image_path: participant.image,
-        department: participant.department,
-        semester: participant.semester,
-      }))
-    );
-
-    if (error)
-      throw new Error(`Participants insertion failed: ${error.message}`);
-  };
-
-  const insertAdditionalThemes = async (themeIds, registrationId) => {
-    if (themeIds.length > 0) {
-      const { error } = await supabaseClient.from("additional_themes").insert(
-        themeIds.map((themeId) => ({
-          registration_id: registrationId,
-          theme_id: themeId,
-        }))
-      );
-
-      if (error)
-        throw new Error(`Additional themes insertion failed: ${error.message}`);
-    }
-  };
-
   const onSubmit = async (values) => {
     setIsLoading(true);
     let uploadedImages = [];
@@ -223,6 +173,7 @@ const RegisterForm = () => {
 
       const registrationId = registrationData.id;
 
+      setRegistrationId(registrationId);
       // Insert participants
       const { error: participantsError } = await supabaseClient
         .from("participants")
@@ -244,6 +195,11 @@ const RegisterForm = () => {
           `Participants insertion failed: ${participantsError.message}`
         );
 
+      const newEmails = participantsWithImages.map(
+        (participant) => participant.email
+      );
+      console.log("newEmails", newEmails);
+      setEmail((prevEmails) => [...prevEmails, ...newEmails]);
       // Insert additional themes
       if (values.additionalThemes.length > 0) {
         const { error: themesError } = await supabaseClient

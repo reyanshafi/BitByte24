@@ -57,7 +57,7 @@ const About = () => {
                   <h5 className="mb-2 text-xl md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {event.name}
                   </h5>
-                  <p className="mb-4 font-semibold text-gray-700 dark:text-gray-400 border  rounded-md inline-block px-4 py-2 shadow-md">
+                  <p className="mb-4 font-semibold text-gray-700 dark:text-gray-400 border rounded-md inline-block px-4 py-2 shadow-sm">
                     {` ${event.teamSize}`}
                   </p>
                   <p className="font-normal text-gray-700 dark:text-gray-400">
@@ -69,13 +69,24 @@ const About = () => {
           </div>
         </section>
 
+        {/* New Section: Who Can Participate */}
+        <section className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Who can participate in this event?
+          </h2>
+          <p className="text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300">
+            This event is open to all students of IUST.
+          </p>
+          <p className="text-gray-600 dark:text-gray-400 mt-4">
+            Whether you&apos;re a beginner or an expert, come join us for an
+            exciting and enriching learning experience!
+          </p>
+        </section>
+
         <section className="text-center mb-6">
-          <h2 className="text-xl md:text-2xl font-semibold text-gray-800 ">
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
             Organized by Team CSE 🏅
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Join us for an unforgettable learning experience.
-          </p>
         </section>
       </div>
     </Model>
