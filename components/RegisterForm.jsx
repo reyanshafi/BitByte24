@@ -10,6 +10,7 @@ import ThemeSelector from "./ThemeSelector";
 import { departments } from "../constants";
 import useTempGateway from "../hooks/useTempGateway";
 import { useRegistration } from "../lib/RegistrationContext";
+
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onClose } = useRegistrationModel();
@@ -66,6 +67,13 @@ const RegisterForm = () => {
   const defaultTheme = watch("defaultTheme");
   const additionalThemes = watch("additionalThemes");
 
+  // Event options based on registration type
+  const eventOptions = {
+    single: ["Find the keyword", "Typing Competition", "Problem Solving"],
+    duo: ["Keyboard Jumble", "Mini Hackathon", "IoT Challenge", "Quiz"],
+    squad: ["Debate", "BGMI", "Valorant"],
+  };
+
   const updateParticipantFields = useCallback(
     (type) => {
       const participantCount = { single: 1, duo: 2, squad: 4 }[type];
@@ -93,10 +101,10 @@ const RegisterForm = () => {
   );
 
   const calculateTotalAmount = useCallback((type, themeCount) => {
-    const baseFees = { single: 199, duo: 350, squad: 650 }[type];
+    const baseFees = { single: 199, duo: 380, squad: 760 }[type];
     const additionalEventCount = themeCount;
     const additionalFees =
-      { single: 149, duo: 200, squad: 400 }[type] * additionalEventCount;
+      { single: 149, duo: 340, squad: 700 }[type] * additionalEventCount;
     return baseFees + additionalFees;
   }, []);
 
@@ -255,18 +263,29 @@ const RegisterForm = () => {
             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
             <option value="single">Single(199 INR)</option>
-            <option value="duo">Duo(350 INR)</option>
-            <option value="squad">Squad (650 INR)</option>
+            <option value="duo">Duo(380 INR)</option>
+            <option value="squad">Squad (760 INR)</option>
           </select>
         </div>
 
-        <ThemeSelector
-          register={register}
-          errors={errors}
-          setValue={setValue}
-          name="defaultTheme"
-          label="Default Theme"
-        />
+        <div className="mt-4">
+          <label
+            htmlFor="defaultTheme"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Select Event
+          </label>
+          <select
+            {...register("defaultTheme", { required: true })}
+            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          >
+            {eventOptions[registrationType]?.map((event, index) => (
+              <option value={event} key={index}>
+                {event}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {additionalThemeFields.map((field, index) => (
           <ThemeSelector
@@ -284,7 +303,7 @@ const RegisterForm = () => {
         {additionalThemes.length < 2 && (
           <>
             <p className="text-xs font-normal mt-2">
-              <span className="text-red-500">*</span>(you can participante in
+              <span className="text-red-500">*</span>(you can participate in
               maximum 3 themes with some minor extra charges)
             </p>
             <button
@@ -386,7 +405,7 @@ const RegisterForm = () => {
                 <option value="3rd">3rd</option>
                 <option value="5th">5th</option>
                 <option value="7th">7th</option>
-                <option value="9th">9th(B. Arch)</option>
+                <option value="9th(B. Arch)">9th(B. Arch)</option>
               </select>
               {errors.participants?.[index]?.semester && (
                 <p className="text-red-500 text-sm">

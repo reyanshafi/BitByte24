@@ -25,7 +25,7 @@ export const TypewriterEffect = ({ words, className, cursorClassName }) => {
           {words.map((word, idx) => (
             <span
               key={idx}
-              className={cn("dark:text-white text-black", word.className)}
+              className={cn("dark:text-black text-black", word.className)}
             >
               {word.text}
             </span>

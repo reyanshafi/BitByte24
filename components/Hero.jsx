@@ -7,9 +7,6 @@ import useAboutModel from "../hooks/useAboutModel";
 import useRegistrationModel from "../hooks/useRegistrationForm";
 import { MdEmojiEvents } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
-import Games from "../components/Games";
-
-
 
 const Hero = () => {
   const aboutModel = useAboutModel();
@@ -32,7 +29,7 @@ const Hero = () => {
 
   return (
     <div className="relative flex flex-col items-center p-2 z-10 md:mt-50">
-      {/* Logo container with responsive margin */}
+      {/* Hero content */}
       <div className="flex justify-center mb-4 md:mb-6 lg:mb-8">
         <Image
           src={logo}

@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 
 // Sample data for PS5 games
@@ -24,7 +23,7 @@ const games = [
   // Add more games as needed
 ];
 
-const Games = () => {
+const PS5Games = () => {
   return (
     <div className="p-6 bg-gray-100">
       <h2 className="text-3xl font-bold text-center mb-8">PS5 Games</h2>
@@ -54,4 +53,4 @@ const Games = () => {
   );
 };
 
-export default Games;
+export default PS5Games;
