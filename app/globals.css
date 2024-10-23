@@ -5,14 +5,16 @@
 .main {
   width: 100vw;
   min-height: 100vh;
-  position: fixed;
+  position: relative; /* or 'fixed' depending on your layout */
   display: flex;
   justify-content: center;
   padding: 120px 24px 160px 24px;
+  /* overflow-y: auto; smoother scrolling behavior */
+  z-index: 3; /* Ensure it's above the pseudo-elements */
 }
 
 .main:before {
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+  background: radial-gradient(circle, rgba(2, 0, 36, 0.1) 0%, #fafafa 100%);
   position: absolute;
   content: "";
   z-index: 2;
@@ -60,7 +62,7 @@
 
 @media screen and (max-width: 640px) {
   .main {
-    padding: 0;
+    padding: 24px; /* Ensure some padding for mobile */
   }
 }
 
