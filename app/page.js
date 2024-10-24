@@ -26,7 +26,11 @@ const Home = () => {
       <div className="mt-10 mb-4 text-center">
         <p className="font-mono text-lg text-gray-700 dark:text-gray-600">
           www.bitbyte.iust.ac.in
+<<<<<<< HEAD
         </p>
+=======
+    </p>
+>>>>>>> 07af9271a2aad8ccde349be1dbdff0854f91a993
       </div>
 
       {/* Simple animated tech icons above the footer */}
