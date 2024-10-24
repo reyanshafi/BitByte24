@@ -3,17 +3,20 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import PS5Games from "../components/PS5Games";  // Import PS5Games component
+import Events from "../components/Events";
 import { FaServer, FaDatabase, FaLaptopCode, FaMobileAlt, FaCloud, FaCode } from "react-icons/fa";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Home = () => {
   return (
     <>
-      <div className="main">
+      <div className="main min-w-full">
         <div className="gradient" />
         <div className="relative z-10 flex justify-center items-center flex-col max-w-full mx-auto sm:px-16 px-6 md:mt-30">
           <Navbar />
           <Hero />
+          <Events  />
+          <PS5Games />
         </div>
       </div>
 
@@ -22,7 +25,7 @@ const Home = () => {
       {/* Website Link in Monospace Font */}
       <div className="mt-10 mb-4 text-center">
         <p className="font-mono text-lg text-gray-700 dark:text-gray-600">
-          www.bitbyte24.vercel.app
+          www.bitbyte.iust.ac.in
         </p>
       </div>
 

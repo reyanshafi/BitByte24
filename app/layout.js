@@ -1,11 +1,13 @@
 import localFont from "next/font/local";
 import { Orbitron } from "next/font/google"; // Import Orbitron font
-import { VT323 } from "next/font/google"; // Import VT323 from next/font/google
+// import { VT323 } from "next/font/google"; // Import VT323 from next/font/google
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ModelProvider from "../providers/ModelProvider";
 import { RegistrationProvider } from "../lib/RegistrationContext";
+
+
 
 // Local fonts
 const iceberg = localFont({
@@ -30,7 +32,7 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-// Google Fonts: Orbitron
+
 const orbitron = Orbitron({
   subsets: ["latin"],
   weight: ["400", "500", "700"], // Select the weights you want
@@ -47,7 +49,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${ethnocentric.variable} ${iceberg.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ethnocentric.variable} ${iceberg.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         <RegistrationProvider>

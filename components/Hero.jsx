@@ -7,7 +7,7 @@ import useAboutModel from "../hooks/useAboutModel";
 import useRegistrationModel from "../hooks/useRegistrationForm";
 import { MdEmojiEvents } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
-import PS5Games from "../components/PS5Games";
+// import PS5Games from "../components/PS5Games";
 
 const Hero = () => {
   const aboutModel = useAboutModel();
@@ -29,9 +29,16 @@ const Hero = () => {
   };
 
   return (
-    <div className="start-0 w-full flex flex-col items-center z-10 md:mt-50 bg-no-repeat pt-10">
+    <div  className="mb-0 w-screen flex flex-col items-center z-10 bg-no-repeat bg-cover bg-center lg:bg-top md:bg-center sm:bg-bottom pt-10 pb-10 shadow-downward"
+    style={{
+      backgroundImage: 'url(/assets/bgy.png )',
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+    }}
+    >
       {/* Scrolling Text (Marquee) */}
-      <div className="w-full start bg-blue-400 py-2 mb-10 mt-5">
+      {/* <div className="min-w-full start bg-blue-400 py-2 mb-10 mt-5"
+      >
         <div className="overflow-hidden whitespace-nowrap">
           <p className="animate-marquee text-center text-lg sm:text-xl text-gray-900 dark:text-blue font-semibold">
             &quot;BitByte&quot; is a dynamic university event celebrating the world of computer science! 
@@ -40,21 +47,24 @@ const Hero = () => {
             connect with like-minded techies.
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Hero content */}
-      <div className="flex justify-center mb-4 md:mb-6 lg:mb-8">
+      <div className="flex justify-center mb-4 md:mb-6 lg:mb-8"
+      
+      >
         <Image
-          src={logo}
-          width={100}
-          height={100}
-          alt="IUST logo"
-          className="max-w-full h-auto"
-        />
-      </div>
-      <p className="font-icebergtext-center md:text-s text-center sm:text-xs">Department of Computer Science & Engineering</p>
+  src={logo}
+  width={100}
+  height={100}
+  alt="IUST logo"
+  className="max-w-full h-auto ]"
+/>
 
-      <p className="text-gray-800 dark:text-gray-1500 text-md font-semibold my-2 mx-auto leading-relaxed">
+      </div>
+      <p className="font-icebergtext-center md:text-s text-white text-m text-center sm:text-xxs">Department of Computer Science & Engineering</p>
+
+      <p className="text-blue-400 dark:text-gray-1500 text-md font-semibold my-2 mx-auto leading-relaxed">
         Presents
       </p>
 
@@ -84,7 +94,7 @@ const Hero = () => {
         </button>
         <button
           onClick={onClick}
-          className="cursor-pointer inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center hover:shadow-md hover:shadow-gray-900 text-black rounded-lg border border-black hover:bg-gray-100 z-20"
+          className="cursor-pointer inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center hover:shadow-md hover:shadow-white-900 text-blue-500 rounded-lg border border-blue-300 hover:bg-gray-100 z-20"
         >
           About BitByte
           <span>
@@ -92,7 +102,7 @@ const Hero = () => {
           </span>
         </button>
       </div>
-      <PS5Games />
+      {/* <PS5Games /> */}
     </div>
   );
 };

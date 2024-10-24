@@ -10,7 +10,7 @@ export const TypewriterEffect = ({ words, className, cursorClassName }) => {
   useEffect(() => {
     controls.start({
       width: "fit-content",
-      transition: { duration: 2, ease: "linear", delay: 1 },
+      transition: { duration: 2, ease: "easeInOut", delay: 1 }, // Smoother easing
     });
   }, [controls]);
 
@@ -21,25 +21,25 @@ export const TypewriterEffect = ({ words, className, cursorClassName }) => {
         initial={{ width: "0%" }}
         animate={controls}
       >
-        <div className=" text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap">
+        <div className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap">
           {words.map((word, idx) => (
             <motion.span
               key={idx}
-              className={cn("font-sans font-medium dark:text-black text-black", word.className)}
+              className={cn("font-medium dark:text-white text-white", word.className)}
               whileHover={{
-                scale: [1, 1.2, 1], // Pulse effect
-                textShadow: "0px 0px 8px rgba(0, 255, 255, 1)", // Glowing effect
-                letterSpacing: "0.3em", // Slight increase in letter spacing
+                scale: 1.1, // Subtle scale on hover
+                textShadow: "0px 0px 8px rgba(0, 150, 255, 0.8)", // Softer glow effect
+                letterSpacing: "0.1em", // Small letter spacing on hover
               }}
-              initial={{ opacity: 0, y: 20 }} // Fade and slide from below
-              animate={{ opacity: 1, y: 0 }} // Animate to normal position
+              initial={{ opacity: 0, y: 30 }} // Slide from below with opacity transition
+              animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.6,
-                ease: "easeInOut",
-                repeatType: "mirror", // Mirror repeat for the pulse effect
+                duration: 0.8, // Smoother and slower transition
+                ease: "easeInOut", // Smoother easing
+                delay: idx * 0.3, // Staggered animation for each word
               }}
               whileTap={{
-                scale: 0.95, // Click press effect
+                scale: 0.95, // Slight press effect on click
               }}
             >
               {word.text}

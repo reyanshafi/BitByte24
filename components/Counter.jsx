@@ -33,19 +33,19 @@ const CountdownTimer = () => {
 
   return (
     <div className="grid grid-flow-col gap-5 text-center auto-cols-max my-2">
-      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-white shadow-md shadow-gray-900 text-neutral-content ">
+      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-white shadow-md shadow-blue-300 text-neutral-content ">
         <span className="countdown font-mono text-5xl">{timeLeft.days}</span>
         days
       </div>
-      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-white shadow-md shadow-gray-900  rounded-box text-neutral-content">
+      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-white shadow-md shadow-blue-200  rounded-box text-neutral-content">
         <span className="countdown font-mono text-5xl">{timeLeft.hours}</span>
         hours
       </div>
-      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-white shadow-md shadow-gray-900  rounded-box text-neutral-content">
+      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-white shadow-md shadow-gray-300  rounded-box text-neutral-content">
         <span className="countdown font-mono text-5xl">{timeLeft.minutes}</span>
         min
       </div>
-      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-white shadow-md shadow-gray-900  rounded-box text-neutral-content">
+      <div className="flex flex-col p-2 bg-gray-900 rounded-md rounded-box text-blue-400 shadow-md shadow-gray-300  rounded-box text-neutral-content">
         <span className="countdown font-mono text-5xl">{timeLeft.seconds}</span>
         sec
       </div>

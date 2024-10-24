@@ -8,6 +8,7 @@
   position: relative; /* or 'fixed' depending on your layout */
   display: flex;
   justify-content: center;
+  ;
   padding: 70px 24px 160px 24px;
   /* overflow-y: auto;  */
   z-index: 3; /* Ensure it's above the pseudo-elements */
@@ -249,6 +250,10 @@
 
 .animate-marquee {
   animation: marquee 20s linear infinite;
+}
+
+.shadow-downward {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* You can adjust the shadow size and opacity */
 }
 
 

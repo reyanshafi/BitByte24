@@ -32,7 +32,7 @@ const games = [
 const PS5Games = () => {
   return (
     <div
-      className="p-6 bg-gray-200 mt-10 bg-cover bg-center bg-no-repeat max-w-7xl"
+      className="p-6 bg-#2a8ec6 mt-10 bg-cover bg-center bg-no-repeat max-w-7xl"
     
     >
       {/* Interactive Heading */}
