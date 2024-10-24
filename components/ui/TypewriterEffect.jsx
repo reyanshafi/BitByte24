@@ -25,7 +25,7 @@ export const TypewriterEffect = ({ words, className, cursorClassName }) => {
           {words.map((word, idx) => (
             <motion.span
               key={idx}
-              className={cn("font-medium dark:text-black text-black", word.className)}
+              className={cn("font-sans font-medium dark:text-black text-black", word.className)}
               whileHover={{
                 scale: [1, 1.2, 1], // Pulse effect
                 textShadow: "0px 0px 8px rgba(0, 255, 255, 1)", // Glowing effect

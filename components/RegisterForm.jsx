@@ -10,7 +10,6 @@ import ThemeSelector from "./ThemeSelector";
 import { departments } from "../constants";
 import useTempGateway from "../hooks/useTempGateway";
 import { useRegistration } from "../lib/RegistrationContext";
-
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onClose } = useRegistrationModel();
@@ -67,13 +66,6 @@ const RegisterForm = () => {
   const defaultTheme = watch("defaultTheme");
   const additionalThemes = watch("additionalThemes");
 
-  // Event options based on registration type
-  const eventOptions = {
-    single: ["Find the keyword", "Typing Competition", "Problem Solving"],
-    duo: ["Keyboard Jumble", "Mini Hackathon", "IoT Challenge", "Quiz", "Debate"],
-    squad: ["BGMI (Gaming)", "Valorant (Gaming)"],
-  };
-
   const updateParticipantFields = useCallback(
     (type) => {
       const participantCount = { single: 1, duo: 2, squad: 4 }[type];
@@ -101,8 +93,10 @@ const RegisterForm = () => {
   );
 
   const calculateTotalAmount = useCallback((type, themeCount) => {
-    const baseFees = { single: 199, duo: 399, squad: 799 }[type];
-    const additionalFees = { single: 170, duo: 360, squad: 700 }[type] * themeCount;
+    const baseFees = { single: 199, duo: 350, squad: 650 }[type];
+    const additionalEventCount = themeCount;
+    const additionalFees =
+      { single: 149, duo: 200, squad: 400 }[type] * additionalEventCount;
     return baseFees + additionalFees;
   }, []);
 
@@ -111,7 +105,9 @@ const RegisterForm = () => {
   }, [registrationType, updateParticipantFields]);
 
   useEffect(() => {
-    setTotalAmount(calculateTotalAmount(registrationType, additionalThemes.length));
+    setTotalAmount(
+      calculateTotalAmount(registrationType, additionalThemes.length)
+    );
   }, [registrationType, defaultTheme, additionalThemes, calculateTotalAmount]);
 
   const uploadImage = async (file, fullname, email) => {
@@ -126,76 +122,114 @@ const RegisterForm = () => {
     return data.path;
   };
 
-  const insertRegistration = async (values, totalAmount) => {
+  const fetchThemeIds = async (themeNames) => {
     const { data, error } = await supabaseClient
-      .from("registrations")
-      .insert({
-        registration_type: values.registrationType,
-        default_theme_id: values.defaultTheme,
-        amount: totalAmount,
-        payment_done: false,
-      })
-      .select("id")
-      .single();
+      .from("themes")
+      .select("id, name")
+      .in("name", themeNames);
 
-    if (error) throw new Error(`Registration insertion failed: ${error.message}`);
-    return data.id;
-  };
-
-  const insertParticipants = async (participantsWithImages, registrationId) => {
-    const { error } = await supabaseClient
-      .from("participants")
-      .insert(
-        participantsWithImages.map((participant) => ({
-          registration_id: registrationId,
-          fullname: participant.fullname,
-          email: participant.email,
-          student_id: participant.studentId,
-          phone: participant.phone,
-          image_path: participant.image,
-          department: participant.department,
-          semester: participant.semester,
-        }))
-      );
-
-    if (error) throw new Error(`Participants insertion failed: ${error.message}`);
-  };
-
-  const insertAdditionalThemes = async (additionalThemes, registrationId) => {
-    const { error } = await supabaseClient
-      .from("additional_themes")
-      .insert(
-        additionalThemes.map((themeName) => ({
-          registration_id: registrationId,
-          theme_id: themeName,
-        }))
-      );
-
-    if (error) throw new Error(`Additional themes insertion failed: ${error.message}`);
+    if (error) throw new Error(`Failed to fetch theme IDs: ${error.message}`);
+    return data.reduce(
+      (acc, theme) => ({ ...acc, [theme.name]: theme.id }),
+      {}
+    );
   };
 
   const onSubmit = async (values) => {
     setIsLoading(true);
+    let uploadedImages = [];
     try {
       const allThemes = [values.defaultTheme, ...values.additionalThemes];
+      const themeIds = await fetchThemeIds(allThemes);
+
       const participantsWithImages = await Promise.all(
         values.participants.map(async (p) => {
           const imagePath = await uploadImage(p.image[0], p.fullname, p.email);
-          return { ...p, image: imagePath };
+          uploadedImages.push(imagePath); // Store the image path
+          return {
+            ...p,
+            image: imagePath,
+          };
         })
       );
-      const registrationId = await insertRegistration(values, totalAmount);
+
+      // Insert registration
+      const { data: registrationData, error: registrationError } =
+        await supabaseClient
+          .from("registrations")
+          .insert({
+            registration_type: values.registrationType,
+            default_theme_id: themeIds[values.defaultTheme],
+            amount: totalAmount,
+            payment_done: false,
+          })
+          .select("id")
+          .single();
+
+      if (registrationError)
+        throw new Error(
+          `Registration insertion failed: ${registrationError.message}`
+        );
+
+      const registrationId = registrationData.id;
+
       setRegistrationId(registrationId);
-      await insertParticipants(participantsWithImages, registrationId);
+      // Insert participants
+      const { error: participantsError } = await supabaseClient
+        .from("participants")
+        .insert(
+          participantsWithImages.map((participant) => ({
+            registration_id: registrationId,
+            fullname: participant.fullname,
+            email: participant.email,
+            student_id: participant.studentId,
+            phone: participant.phone,
+            image_path: participant.image,
+            department: participant.department,
+            semester: participant.semester,
+          }))
+        );
+
+      if (participantsError)
+        throw new Error(
+          `Participants insertion failed: ${participantsError.message}`
+        );
+
+      const newEmails = participantsWithImages.map(
+        (participant) => participant.email
+      );
+      console.log("newEmails", newEmails);
+      setEmail((prevEmails) => [...prevEmails, ...newEmails]);
+      // Insert additional themes
       if (values.additionalThemes.length > 0) {
-        await insertAdditionalThemes(values.additionalThemes, registrationId);
+        const { error: themesError } = await supabaseClient
+          .from("additional_themes")
+          .insert(
+            values.additionalThemes.map((themeName) => ({
+              registration_id: registrationId,
+              theme_id: themeIds[themeName],
+            }))
+          );
+
+        if (themesError)
+          throw new Error(
+            `Additional themes insertion failed: ${themesError.message}`
+          );
       }
+
       toast.warn("Data uploaded successfully, proceed to payment...");
       reset();
       onClose();
-      tempGateway.onOpen();
+      return tempGateway.onOpen();
     } catch (error) {
       toast.error(`Registration failed: ${error.message}`);
+      if (uploadedImages.length > 0) {
+        await Promise.all(
+          uploadedImages.map(async (imagePath) => {
+            await supabaseClient.storage.from("images").remove([imagePath]);
+          })
+        );
+      }
     } finally {
       setIsLoading(false);
     }
@@ -210,34 +244,29 @@ const RegisterForm = () => {
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="mt-2">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
+          <label
+            htmlFor="registrationType"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
             Registration Type:
           </label>
           <select
             {...register("registrationType", { required: true })}
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm"
+            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
-            <option value="single">Single (199 INR)</option>
-            <option value="duo">Duo (399 INR)</option>
-            <option value="squad">Squad (799 INR)</option>
+            <option value="single">Single(199 INR)</option>
+            <option value="duo">Duo(350 INR)</option>
+            <option value="squad">Squad (650 INR)</option>
           </select>
         </div>
 
-        <div className="mt-4">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Select Event
-          </label>
-          <select
-            {...register("defaultTheme", { required: true })}
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm"
-          >
-            {eventOptions[registrationType]?.map((event, index) => (
-              <option value={event} key={index}>
-                {event}
-              </option>
-            ))}
-          </select>
-        </div>
+        <ThemeSelector
+          register={register}
+          errors={errors}
+          setValue={setValue}
+          name="defaultTheme"
+          label="Default Theme"
+        />
 
         {additionalThemeFields.map((field, index) => (
           <ThemeSelector
@@ -249,27 +278,30 @@ const RegisterForm = () => {
             label={`Additional Theme ${index + 1}`}
             remove={() => removeAdditionalTheme(index)}
             isRemovable={true}
-            eventOptions={eventOptions[registrationType]} // Filter based on registration type
           />
         ))}
 
         {additionalThemes.length < 2 && (
           <>
             <p className="text-xs font-normal mt-2">
-              You can participate in a maximum of 3 events with some extra discounts for each additional event.
+              <span className="text-red-500">*</span>(you can participante in
+              maximum 3 themes with some minor extra charges)
             </p>
             <button
               type="button"
               onClick={() => appendAdditionalTheme("")}
               className="px-3 py-1 mt-0 bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
-              Add Event
+              Add Theme
             </button>
           </>
         )}
 
         {participantFields.map((field, index) => (
-          <div key={field.id} className="space-y-4 border p-4 rounded-md shadow-md">
+          <div
+            key={field.id}
+            className="space-y-4 border p-4 rounded-md shadow-md"
+          >
             <h3>Member {index + 1}</h3>
             <InputField
               name={`participants.${index}.fullname`}
@@ -311,6 +343,58 @@ const RegisterForm = () => {
                 },
               }}
             />
+
+            <div className="mt-2">
+              <label
+                htmlFor="registrationType"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Department:
+              </label>
+              <select
+                {...register(`participants.${index}.department`, {
+                  required: true,
+                })}
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                {departments?.map((department, index) => (
+                  <option value={department} key={index}>
+                    {department}
+                  </option>
+                ))}
+              </select>
+              {errors.participants?.[index]?.department && (
+                <p className="text-red-500 text-sm">
+                  {errors.participants[index].department.message}
+                </p>
+              )}
+            </div>
+            <div className="mt-2">
+              <label
+                htmlFor="registrationType"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Semester:
+              </label>
+              <select
+                {...register(`participants.${index}.semester`, {
+                  required: true,
+                })}
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option value="1st">1st</option>
+                <option value="3rd">3rd</option>
+                <option value="5th">5th</option>
+                <option value="7th">7th</option>
+                <option value="9th">9th(B. Arch)</option>
+              </select>
+              {errors.participants?.[index]?.semester && (
+                <p className="text-red-500 text-sm">
+                  {errors.participants[index].semester.message}
+                </p>
+              )}
+            </div>
+
             <InputField
               name={`participants.${index}.image`}
               label="Upload Photo"
@@ -322,11 +406,9 @@ const RegisterForm = () => {
             />
           </div>
         ))}
-
         <div className="my-2 px-2">
           <p className="text-lg font-bold">{`Total: Rs.${totalAmount}`}</p>
         </div>
-
         <div className="flex flex-col items-center gap-4">
           <button
             type="submit"
@@ -335,7 +417,11 @@ const RegisterForm = () => {
           >
             {isLoading ? <Spinner /> : `Next`}
           </button>
-          <button type="button" onClick={() => reset()} className="text-sm text-gray-600">
+          <button
+            type="button"
+            onClick={() => reset()}
+            className="text-sm text-gray-600"
+          >
             Clear
           </button>
         </div>
