@@ -59,6 +59,8 @@ const PS5Games = () => {
             <Image
               src={game.image}
               alt={game.title}
+              width={600}
+              height={600}
               className="w-full h-64 object-cover rounded-t-lg"
             />
             {/* Game Title and Description */}
