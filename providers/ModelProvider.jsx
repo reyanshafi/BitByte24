@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import RegisterForm from "../components/RegisterForm";
 import About from "../components/About";
 import TempGateway from "../components/TempGateway";
+
 const ModelProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
 

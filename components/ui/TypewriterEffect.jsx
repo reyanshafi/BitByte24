@@ -21,14 +21,29 @@ export const TypewriterEffect = ({ words, className, cursorClassName }) => {
         initial={{ width: "0%" }}
         animate={controls}
       >
-        <div className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap">
+        <div className=" text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap">
           {words.map((word, idx) => (
-            <span
+            <motion.span
               key={idx}
-              className={cn("dark:text-black text-black", word.className)}
+              className={cn("font-medium dark:text-black text-black", word.className)}
+              whileHover={{
+                scale: [1, 1.2, 1], // Pulse effect
+                textShadow: "0px 0px 8px rgba(0, 255, 255, 1)", // Glowing effect
+                letterSpacing: "0.3em", // Slight increase in letter spacing
+              }}
+              initial={{ opacity: 0, y: 20 }} // Fade and slide from below
+              animate={{ opacity: 1, y: 0 }} // Animate to normal position
+              transition={{
+                duration: 0.6,
+                ease: "easeInOut",
+                repeatType: "mirror", // Mirror repeat for the pulse effect
+              }}
+              whileTap={{
+                scale: 0.95, // Click press effect
+              }}
             >
               {word.text}
-            </span>
+            </motion.span>
           ))}
         </div>
       </motion.div>

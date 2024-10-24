@@ -68,11 +68,13 @@ const RegisterForm = () => {
   const additionalThemes = watch("additionalThemes");
 
   // Event options based on registration type
-  const eventOptions = {
-    single: ["Find the keyword", "Typing Competition", "Problem Solving"],
-    duo: ["Keyboard Jumble", "Mini Hackathon", "IoT Challenge", "Quiz"],
-    squad: ["Debate", "BGMI", "Valorant"],
-  };
+  // Event options based on registration type
+const eventOptions = {
+  single: ["Find the keyword", "Typing Competition", "Problem Solving"],
+  duo: ["Keyboard Jumble", "Mini Hackathon", "IoT Challenge", "Quiz", "Debate"], // Moved "Debate" here
+  squad: ["BGMI (Gaming)", "Valorant (Gaming)"], // Removed "Debate"
+};
+
 
   const updateParticipantFields = useCallback(
     (type) => {
@@ -101,10 +103,10 @@ const RegisterForm = () => {
   );
 
   const calculateTotalAmount = useCallback((type, themeCount) => {
-    const baseFees = { single: 199, duo: 380, squad: 760 }[type];
+    const baseFees = { single: 199, duo: 399, squad: 799 }[type];
     const additionalEventCount = themeCount;
     const additionalFees =
-      { single: 149, duo: 340, squad: 700 }[type] * additionalEventCount;
+      { single: 170, duo: 360, squad: 700 }[type] * additionalEventCount;
     return baseFees + additionalFees;
   }, []);
 
@@ -260,11 +262,11 @@ const RegisterForm = () => {
           </label>
           <select
             {...register("registrationType", { required: true })}
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full py-2 p x-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
             <option value="single">Single(199 INR)</option>
-            <option value="duo">Duo(380 INR)</option>
-            <option value="squad">Squad (760 INR)</option>
+            <option value="duo">Duo(399 INR)</option>
+            <option value="squad">Squad (799 INR)</option>
           </select>
         </div>
 
@@ -304,14 +306,14 @@ const RegisterForm = () => {
           <>
             <p className="text-xs font-normal mt-2">
               <span className="text-red-500">*</span>(you can participate in
-              maximum 3 themes with some minor extra charges)
+              maximum of 3 events with some extra discounts for each additional event)
             </p>
             <button
               type="button"
               onClick={() => appendAdditionalTheme("")}
               className="px-3 py-1 mt-0 bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
-              Add Theme
+              Add Event
             </button>
           </>
         )}

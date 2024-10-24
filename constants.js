@@ -8,6 +8,7 @@ import Problemsol from "./public/assets/images/Problemsol.jpg";
 import Typing from "./public/assets/images/Typing.jpg";
 import Wordfind from "./public/assets/images/Wordfind.jpg";
 
+
 export const eventInfo = [
   {
     name: "Keyboard Jumble",

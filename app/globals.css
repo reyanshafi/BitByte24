@@ -8,8 +8,8 @@
   position: relative; /* or 'fixed' depending on your layout */
   display: flex;
   justify-content: center;
-  padding: 120px 24px 160px 24px;
-  /* overflow-y: auto; smoother scrolling behavior */
+  padding: 70px 24px 160px 24px;
+  /* overflow-y: auto;  */
   z-index: 3; /* Ensure it's above the pseudo-elements */
 }
 
@@ -25,13 +25,13 @@
 
 .main:after {
   content: "";
-  /* background-image: url("/assets/grid.svg"); */
+  /* background-image: url("/assets/bg.jpg"); */
   z-index: 1;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
-  opacity: 0.4;
+  opacity: 1;
   filter: invert(1);
 }
 
@@ -131,3 +131,126 @@
 .animate-bounce {
   animation: bounce 2s infinite;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 1s ease-out;
+}
+
+@keyframes revealLetter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-letterReveal span {
+  opacity: 0;
+  display: inline-block;
+  animation: revealLetter 0.1s ease-out forwards;
+}
+
+@keyframes simpleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-simpleFadeIn {
+  animation: simpleFadeIn 1s ease-out forwards;
+}
+
+/* 3D text shadow */
+.hover\:text-shadow-3d {
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1),
+               4px 4px 4px rgba(0, 0, 0, 0.1),
+               6px 6px 6px rgba(0, 0, 0, 0.1),
+               8px 8px 8px rgba(0, 0, 0, 0.1),
+               10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Entrance animation for the cards */
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-cardEntrance {
+  animation: cardEntrance 0.8s ease-out forwards;
+}
+
+/* Pulsing shadow effect on hover */
+.hover\:shadow-pulse {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+  animation: shadowPulse 1s;
+}
+
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide {
+  animation: slide 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+
+
+

@@ -7,6 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        vt323: ['VT323', 'monospace'], // Define Orbitron in Tailwind
+        ethnocentric: ['var(--font-ethnocentric)', 'sans-serif'], 
+        iceberg: ['var(--font-iceberg)', 'sans-serif'],
+        orbitron: ['Orbitron', 'sans-serif'], // Adding Orbitron to Tailwind
+
+        
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -15,3 +23,4 @@ module.exports = {
   },
   plugins: [],
 };
+
