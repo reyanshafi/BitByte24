@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 // Sample data for PS5 games with correct descriptions
 const games = [
@@ -40,7 +41,7 @@ const PS5Games = () => {
           Ready to play?
         </p>
         <p className="text-2xl font-iceberg animate-fadeInUp transition-transform duration-500 hover:scale-105">
-          It's 1v1 time on PS4 – face off and see who's the best!
+          It is 1v1 time on PS4 – face off and see who is the best!
         </p>
       </div>
 
@@ -55,7 +56,7 @@ const PS5Games = () => {
             }}
           >
             {/* Image */}
-            <img
+            <Image
               src={game.image}
               alt={game.title}
               className="w-full h-64 object-cover rounded-t-lg"

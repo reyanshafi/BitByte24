@@ -35,7 +35,7 @@ const Hero = () => {
         <div className="overflow-hidden whitespace-nowrap">
           <p className="animate-marquee text-center text-lg sm:text-xl text-gray-900 dark:text-blue font-semibold">
             &quot;BitByte&quot; is a dynamic university event celebrating the world of computer science! 
-            Dive into a blend of tech talks, coding challenges, and hands-on workshops. Whether you're a coding enthusiast, 
+            Dive into a blend of tech talks, coding challenges, and hands-on workshops. Whether you are a coding enthusiast, 
             tech innovator, or just curious about the digital world, BitByte is your gateway to explore, innovate, and 
             connect with like-minded techies.
           </p>
