@@ -48,9 +48,9 @@ export const eventInfo = [
   {
     name: "Debate",
     description:
-      "Teams of four will battle it out in this classic debate format with the opponent team, arguing either in favor or against a topic. Bring your best arguments and persuasive skills to the table!",
+      "Teams of two will battle it out in this classic debate format with the opponent team, arguing either in favor or against a topic. Bring your best arguments and persuasive skills to the table!",
     coverImage: Debate,
-    teamSize: "Squad",
+    teamSize: "Duo",
   },
   {
     name: "Quiz (Buzzer Round)",
@@ -60,7 +60,7 @@ export const eventInfo = [
     teamSize: "Duo",
   },
   {
-    name: "Problem Solving",
+    name: "Coding Competition",
     description:
       "This solo event challenges participants to solve coding problems within a set time limit. Bring your programming expertise and see if you can rise to the top!",
     coverImage: Problemsol,
