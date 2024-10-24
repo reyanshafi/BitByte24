@@ -114,6 +114,66 @@ const RegisterForm = () => {
     setTotalAmount(calculateTotalAmount(registrationType, additionalThemes.length));
   }, [registrationType, defaultTheme, additionalThemes, calculateTotalAmount]);
 
+  const uploadImage = async (file, fullname, email) => {
+    const { data, error } = await supabaseClient.storage
+      .from("images")
+      .upload(`${fullname}-${email}`, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (error) throw new Error(`Image upload failed: ${error.message}`);
+    return data.path;
+  };
+
+  const insertRegistration = async (values, totalAmount) => {
+    const { data, error } = await supabaseClient
+      .from("registrations")
+      .insert({
+        registration_type: values.registrationType,
+        default_theme_id: values.defaultTheme,
+        amount: totalAmount,
+        payment_done: false,
+      })
+      .select("id")
+      .single();
+
+    if (error) throw new Error(`Registration insertion failed: ${error.message}`);
+    return data.id;
+  };
+
+  const insertParticipants = async (participantsWithImages, registrationId) => {
+    const { error } = await supabaseClient
+      .from("participants")
+      .insert(
+        participantsWithImages.map((participant) => ({
+          registration_id: registrationId,
+          fullname: participant.fullname,
+          email: participant.email,
+          student_id: participant.studentId,
+          phone: participant.phone,
+          image_path: participant.image,
+          department: participant.department,
+          semester: participant.semester,
+        }))
+      );
+
+    if (error) throw new Error(`Participants insertion failed: ${error.message}`);
+  };
+
+  const insertAdditionalThemes = async (additionalThemes, registrationId) => {
+    const { error } = await supabaseClient
+      .from("additional_themes")
+      .insert(
+        additionalThemes.map((themeName) => ({
+          registration_id: registrationId,
+          theme_id: themeName,
+        }))
+      );
+
+    if (error) throw new Error(`Additional themes insertion failed: ${error.message}`);
+  };
+
   const onSubmit = async (values) => {
     setIsLoading(true);
     try {
@@ -250,6 +310,15 @@ const RegisterForm = () => {
                   message: "Invalid phone number",
                 },
               }}
+            />
+            <InputField
+              name={`participants.${index}.image`}
+              label="Upload Photo"
+              type="file"
+              accept="image/*"
+              register={register}
+              errors={errors.participants?.[index] || {}}
+              validation={{ required: "Image is required" }}
             />
           </div>
         ))}

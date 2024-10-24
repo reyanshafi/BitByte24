@@ -52,7 +52,7 @@ const Hero = () => {
           className="max-w-full h-auto"
         />
       </div>
-      <p className="font-icebergtext-center md:text-s text-censm:text-xs">Department of Computer Science & Engineering</p>
+      <p className="font-icebergtext-center md:text-s text-center sm:text-xs">Department of Computer Science & Engineering</p>
 
       <p className="text-gray-800 dark:text-gray-1500 text-md font-semibold my-2 mx-auto leading-relaxed">
         Presents
