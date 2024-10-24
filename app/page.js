@@ -10,7 +10,7 @@ import { FaInstagram, FaLinkedin } from "react-icons/fa";
 const Home = () => {
   return (
     <>
-      <div className="main min-w-full">
+      <div className="main">
         <div className="gradient" />
         <div className="relative z-10 flex justify-center items-center flex-col max-w-full mx-auto sm:px-16 px-6 md:mt-30">
           <Navbar />
@@ -25,13 +25,9 @@ const Home = () => {
       {/* Website Link in Monospace Font */}
       <div className="mt-10 mb-4 text-center">
         <p className="font-mono text-lg text-gray-700 dark:text-gray-600">
-          www.bitbyte.iust.ac.in
-<<<<<<< HEAD
-        </p>
-=======
-    </p>
->>>>>>> 07af9271a2aad8ccde349be1dbdff0854f91a993
-      </div>
+          bitbyte.iust.ac.in
+         </p>
+       </div>
 
       {/* Simple animated tech icons above the footer */}
       <div className="w-50 bg-gray-900 py-8 flex justify-center items-center overflow-hidden">
