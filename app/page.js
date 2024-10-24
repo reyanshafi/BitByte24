@@ -22,8 +22,8 @@ const Home = () => {
       {/* Website Link in Monospace Font */}
       <div className="mt-10 mb-4 text-center">
         <p className="font-mono text-lg text-gray-700 dark:text-gray-600">
-          www.bitbyte24.vercel.app
-        </p>
+          www.bitbyte.iust.ac.in
+    </p>
       </div>
 
       {/* Simple animated tech icons above the footer */}
