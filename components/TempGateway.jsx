@@ -120,11 +120,11 @@ const TempGateway = () => {
           </button>
         </form>
 
-        {isSubmitted && (
+        {/* {isSubmitted && (
           <p className="mt-4 text-green-600">
             Form submitted successfully! We will get back to you shortly.
           </p>
-        )}
+        )} */}
       </div>
     </Model>
   );

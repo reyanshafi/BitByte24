@@ -116,7 +116,7 @@ export default async function handler(req, res) {
               </div>
              
               <div class="footer">
-                <p>For any queries, please reach out to us at : +919906512509</p>
+                <p>For any queries, please reach out to us at : +919697122941</p>
                 <p>&copy; 2024 BITBYTE. All rights reserved.</p>
                 
               </div>
