@@ -1,18 +1,6 @@
 import React from "react";
 
-const themes = [
-  "Keyboard Jumble",
-  "Find the Keyword",
-  "Mini Hackathon",
-  "IoT Challenge",
-  "Gaming(Valorant)",
-  "Gaming(BGMI)",
-  "Debate",
-  "Quiz (Buzzer Round)",
-  "Problem Solving",
-  "Typing Competition",
-];
-
+// Remove the static themes list and pass it as a prop instead
 const ThemeSelector = ({
   register,
   errors,
@@ -21,6 +9,7 @@ const ThemeSelector = ({
   label,
   remove,
   isRemovable,
+  options = [], // Dynamic event options based on registration type
 }) => {
   return (
     <div className="sm:col-span-4 mt-1 flex items-center">
@@ -37,8 +26,9 @@ const ThemeSelector = ({
           })}
           className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
-          <option value="">Select a theme</option>
-          {themes.map((theme, themeIndex) => (
+          <option value="">Select an Event</option>
+          {/* Render dynamic event options */}
+          {options.map((theme, themeIndex) => (
             <option key={themeIndex} value={theme}>
               {theme}
             </option>

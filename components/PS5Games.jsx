@@ -1,97 +1,78 @@
 import React from "react";
 import Image from "next/image";
 
-// Sample data for PS5 games with correct descriptions
+// Sample data for PS4 games
 const games = [
   {
     id: 1,
     title: "FIFA 21",
-    description: "Show off your football skills in FIFA 21 showdown! Compete against your peers for ultimate bragging rights at the university.",
-    image: "/assets/fifa.jpg", // Ensure the image path is correct
+    description: "Showcase your football skills in FIFA 21! Build your dream team and compete in thrilling matches to outscore your opponent",
+    image: "/assets/fifa.jpg",
   },
   {
     id: 2,
     title: "WWE 2K18",
-    description: "Step into the ring and face off in a 1v1 WWE 2K18 match. Take down your opponent and claim the title of the ultimate university champion!",
-    image: "/assets/wwe.jpg", // Ensure the image path is correct
+    description: "SStep into the ring with WWE 2K18! Choose your favorite wrestling superstar and take down your opponents in an intense 1v1 battle. Bring your best moves and claim the championship title!.",
+    image: "/assets/wwe.jpg",
   },
   {
     id: 3,
     title: "TEKKEN 7",
-    description: "Get ready for intense 1v1 battles in TEKKEN 7! Prove your fighting skills and outplay your opponent in this university tournament.",
+    description: "Get ready for explosive 1v1 combat in Tekken 7! Master your favorite fighter's moves and engage in epic battles. Prove your dominance in the arena and be crowned the Tekken champion!",
     image: "/assets/tekken.jpg",
   },
   {
     id: 4,
-    title: "GRAN TURISMO",
-    description: "Race head-to-head in a 1v1 Gran Turismo challenge. Test your driving skills and see who reigns supreme on the virtual track!",
+    title: "Gran Turismo",
+    description: "Experience the thrill of high-speed racing with Gran Turismo! Compete on iconic tracks and test your driving skills in a head-to-head challenge. Are you ready to claim the top spot on the podium?",
     image: "/assets/turismo.jpg",
+  },
+  {
+    id: 5,
+    title: "Virtual Reality",
+    description: "Step into the immersive world of Virtual Reality! Compete in thrilling VR games that challenge your reflexes, strategy, and skill. Get ready to dive into a whole new dimension of gaming!",
+    image: "/assets/vr.webp",
   },
 ];
 
-const PS5Games = () => {
+const PS5GamesDiagonal = () => {
   return (
-    <div
-      className="p-6 bg-#2a8ec6 mt-10 bg-cover bg-center bg-no-repeat max-w-7xl"
-    
-    >
-      {/* Interactive Heading */}
-      <div className="text-center mb-4">
-        <p className="text-4xl font-vt323 font-bold mb-4 animate-fadeInUp transition-transform duration-500 hover:scale-105">
-          Ready to play?
-        </p>
-        <p className="text-2xl font-iceberg animate-fadeInUp transition-transform duration-500 hover:scale-105">
-          It is 1v1 time on PS4 – face off and see who is the best!
+    <div className="relative w-full min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100 mt-10">
+      {/* Headline */}
+      <div className="text-center mb-8 px-4">
+        <h1 className="text-3xl md:text-4xl font-bold font-iceberg text-blue-900 mb-4">
+          Get in the Game: PS4 Challenges for Everyone!
+        </h1>
+        <p className="text-md md:text-xl text-gray-700">
+          No waiting, no prep—just on-the-spot gaming fun. Jump in and take on your rivals!
         </p>
       </div>
 
-      {/* Grid for PS5 games */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {games.map((game) => (
+      {/* Container for cards */}
+      <div className="flex flex-col space-y-8 w-full max-w-4xl">
+        {games.map((game, index) => (
           <div
             key={game.id}
-            className="relative bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-black-400"
-            style={{
-              boxShadow: "0 4px 20px rgba(0, 0, 255, 0.5)", // Reflection effect
-            }}
+            className="relative w-full h-80 md:h-96 lg:h-80 overflow-hidden shadow-xl rounded-lg transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl"
           >
             {/* Image */}
             <Image
               src={game.image}
               alt={game.title}
-              width={600}
-              height={600}
-              className="w-full h-64 object-cover rounded-t-lg"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
             />
-            {/* Game Title and Description */}
-            <div className="p-6">
-              <h3 className="text-3xl font-bold font-sans text-gray-900 mb-2">
-                {game.title}
-              </h3>
-              <p className="text-gray-700 text-justify font-mono">{game.description}</p>
-              {/* Venue Information */}
-              <p className="text-sm text-gray-600 mt-4 font-bold">
-                Venue: Hardware and Networking Lab - AB IV
-              </p>
+            {/* Overlay with description, hidden until hover */}
+            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 hover:opacity-100 transition-opacity duration-500">
+              <h2 className="text-2xl font-bold mb-2">{game.title}</h2>
+              <p className="text-sm text-center px-4">{game.description}</p>
             </div>
-            {/* Animation effect border */}
-            <div className="absolute inset-0 rounded-lg border-2 border-transparent hover:border-blue-400 animate-pulse"></div>
           </div>
         ))}
-      </div>
-
-      {/* Animated content below the cards */}
-      <div className="mt-10 text-center animate-slideInUp">
-        <p className="text-xl font-iceberg text-blue-600">
-          And many more exciting challenges await you!
-        </p>
-        <p className="text-md text-gray-700 mt-2">
-          Join the competition, test your skills, and become the ultimate champion.
-        </p>
       </div>
     </div>
   );
 };
 
-export default PS5Games;
-
+export default PS5GamesDiagonal;

@@ -10,7 +10,7 @@ export const TypewriterEffect = ({ words, className, cursorClassName }) => {
   useEffect(() => {
     controls.start({
       width: "fit-content",
-      transition: { duration: 2, ease: "easeInOut", delay: 1 }, // Smoother easing
+      transition: { duration: 2, ease: "easeInOut", delay: 1 },
     });
   }, [controls]);
 
@@ -21,11 +21,14 @@ export const TypewriterEffect = ({ words, className, cursorClassName }) => {
         initial={{ width: "0%" }}
         animate={controls}
       >
-        <div className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-5xl font-bold whitespace-nowrap">
+        <div className="text-lg sm:text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bold whitespace-nowrap">
           {words.map((word, idx) => (
             <motion.span
               key={idx}
-              className={cn("font-medium dark:text-white text-white", word.className)}
+              className={cn(
+                "font-medium dark:text-white text-white",
+                word.className
+              )}
               whileHover={{
                 scale: 1.1, // Subtle scale on hover
                 textShadow: "0px 0px 8px rgba(0, 150, 255, 0.8)", // Softer glow effect

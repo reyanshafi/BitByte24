@@ -24,10 +24,10 @@ const Home = () => {
 
       {/* Website Link in Monospace Font */}
       <div className="mt-10 mb-4 text-center">
-        <p className="font-mono text-lg text-gray-700 dark:text-gray-600">
-          bitbyte.iust.ac.in
-         </p>
-       </div>
+      <p className="font-mono text-lg text-gray-700 dark:text-gray-600">
+         www.bitbyte.iust.ac.in
+      </p>
+      </div>
 
       {/* Simple animated tech icons above the footer */}
       <div className="w-50 bg-gray-900 py-8 flex justify-center items-center overflow-hidden">
@@ -45,7 +45,7 @@ const Home = () => {
       <footer className="w-full bg-gray-800 text-gray-300 py-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center px-6 space-y-4 sm:space-y-0">
           {/* Left side: Copyright info */}
-          <p className="text-sm">&copy; {new Date().getFullYear()} BIT-BYTE. All Rights Reserved.</p>
+          <p className="text-sm">&copy; {new Date().getFullYear()} BIT-BYTE.  All Rights Reserved.</p>
 
           {/* Center: Social Media Links */}
           <div className="flex items-center space-x-4">
@@ -68,7 +68,7 @@ const Home = () => {
           </div>
 
           {/* Right side: Developed by */}
-          <p className="text-sm">Developed by Reyan Shafi and Team</p>
+          <p className="text-sm">Developed by Reyan Shafi and Mujeeb Nazir</p>
         </div>
       </footer>
     </>

@@ -10,12 +10,19 @@ import ThemeSelector from "./ThemeSelector";
 import { departments } from "../constants";
 import useTempGateway from "../hooks/useTempGateway";
 import { useRegistration } from "../lib/RegistrationContext";
+
+// Define event lists based on registration type
+const soloEvents = ["Coding Competition", "Typing Competition", "Find the Keyword"];
+const duoEvents = ["Debate", "Web Development", "Build 1.0", "Keyboard Jumble"];
+const squadEvents = ["BGMI Gaming", "Valorant Gaming"];
+
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onClose } = useRegistrationModel();
   const tempGateway = useTempGateway();
   const [totalAmount, setTotalAmount] = useState(199);
   const { setRegistrationId, setEmail } = useRegistration();
+
   const {
     register,
     control,
@@ -93,10 +100,10 @@ const RegisterForm = () => {
   );
 
   const calculateTotalAmount = useCallback((type, themeCount) => {
-    const baseFees = { single: 199, duo: 350, squad: 650 }[type];
+    const baseFees = { single: 199, duo: 399, squad: 759 }[type];
     const additionalEventCount = themeCount;
     const additionalFees =
-      { single: 149, duo: 200, squad: 400 }[type] * additionalEventCount;
+      { single: 171, duo: 360, squad: 740 }[type] * additionalEventCount;
     return baseFees + additionalFees;
   }, []);
 
@@ -198,7 +205,6 @@ const RegisterForm = () => {
       const newEmails = participantsWithImages.map(
         (participant) => participant.email
       );
-      console.log("newEmails", newEmails);
       setEmail((prevEmails) => [...prevEmails, ...newEmails]);
       // Insert additional themes
       if (values.additionalThemes.length > 0) {
@@ -235,6 +241,18 @@ const RegisterForm = () => {
     }
   };
 
+  // Function to get event options based on registration type
+  const getEventOptions = (type) => {
+    if (type === "single") {
+      return soloEvents;
+    } else if (type === "duo") {
+      return duoEvents;
+    } else if (type === "squad") {
+      return squadEvents;
+    }
+    return [];
+  };
+
   return (
     <Model
       title="Event Registration Form"
@@ -242,7 +260,7 @@ const RegisterForm = () => {
       isOpen={isOpen}
       onChange={onClose}
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 justify-center">
         <div className="mt-2">
           <label
             htmlFor="registrationType"
@@ -254,18 +272,20 @@ const RegisterForm = () => {
             {...register("registrationType", { required: true })}
             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
-            <option value="single">Single(199 INR)</option>
-            <option value="duo">Duo(350 INR)</option>
-            <option value="squad">Squad (650 INR)</option>
+            <option value="single">Single (199 INR)</option>
+            <option value="duo">Duo (399 INR)</option>
+            <option value="squad">Squad (759 INR)</option>
           </select>
         </div>
 
+        {/* Theme selector for default theme */}
         <ThemeSelector
           register={register}
           errors={errors}
           setValue={setValue}
           name="defaultTheme"
-          label="Default Theme"
+          label="Select Event"
+          options={getEventOptions(registrationType)} // Show options based on registration type
         />
 
         {additionalThemeFields.map((field, index) => (
@@ -278,14 +298,15 @@ const RegisterForm = () => {
             label={`Additional Theme ${index + 1}`}
             remove={() => removeAdditionalTheme(index)}
             isRemovable={true}
+            options={getEventOptions(registrationType)} // Show options based on registration type
           />
         ))}
 
         {additionalThemes.length < 2 && (
           <>
             <p className="text-xs font-normal mt-2">
-              <span className="text-red-500">*</span>(you can participante in
-              maximum 3 themes with some minor extra charges)
+              <span className="text-red-500">*</span> (You can participate in
+              a maximum of 3 events with some discount for each additional event.)
             </p>
             <button
               type="button"
@@ -312,7 +333,7 @@ const RegisterForm = () => {
             />
             <InputField
               name={`participants.${index}.studentId`}
-              label="Student Id"
+              label="Registration Id"
               register={register}
               errors={errors.participants?.[index] || {}}
               validation={{ required: "Student Id is required!" }}
@@ -346,7 +367,7 @@ const RegisterForm = () => {
 
             <div className="mt-2">
               <label
-                htmlFor="registrationType"
+                htmlFor="department"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Department:
@@ -371,7 +392,7 @@ const RegisterForm = () => {
             </div>
             <div className="mt-2">
               <label
-                htmlFor="registrationType"
+                htmlFor="semester"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Semester:
@@ -386,7 +407,7 @@ const RegisterForm = () => {
                 <option value="3rd">3rd</option>
                 <option value="5th">5th</option>
                 <option value="7th">7th</option>
-                <option value="9th">9th(B. Arch)</option>
+                <option value="9th(B. Arch)">9th(B. Arch)</option>
               </select>
               {errors.participants?.[index]?.semester && (
                 <p className="text-red-500 text-sm">
