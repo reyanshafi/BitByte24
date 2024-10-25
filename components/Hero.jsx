@@ -41,7 +41,7 @@ const Hero = () => {
       </div>
 
       <p className="font-iceberg text-center md:text-s text-white text-xl text-center sm:text-s">
-        Departmenttt of Computer Science & Engineering
+        Department of Computer Science & Engineering
       </p>
 
       <p className="text-blue-400 dark:text-gray-1500 text-xl font-semibold my-2 mx-auto mb-0 leading-relaxed">
