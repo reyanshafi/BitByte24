@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import Image from "next/image";
 import useRegistrationModel from "../hooks/useRegistrationForm"; // Import the registration modal hook
 
 const events = [
@@ -24,7 +23,7 @@ const events = [
     description:
       "Form your squad and compete in two action-packed games: Valorant and PUBG. Prepare for a thrilling competition of strategy, skill, and teamwork.",
     date: "October 31, 2024",
-    image: "/assets/web.webp",
+    image: "/assets/game.jpg",
   },
   {
     title: "Typing Competition",
@@ -38,7 +37,7 @@ const events = [
     description:
       "Participants in duo, will have to design and develop a website based on a given problem statement. Showcase your creativity and web development skills.",
     date: "October 31, 2024",
-    image: "/assets/keyboard.avif",
+    image: "/assets/web.webp",
   },
   {
     title: "Keyboard Jumble",
@@ -52,21 +51,21 @@ const events = [
     description:
       "A solo game where participants guess keywords based on provided hints. This fun and fast-paced game will challenge your problem-solving and critical thinking skills.",
     date: "October 31, 2024",
-    image: "/assets/keyboard.avif",
+    image: "/assets/keyword.jpg",
   },
   {
     title: "Debate",
     description:
       "Teams of two will battle it out in this classic debate format with the opponent team, arguing either in favor or against a topic. Bring your best arguments and persuasive skills to the table!",
     date: "October 31, 2024",
-    image: "/assets/keyboard.avif",
+    image: "/assets/debate.jpeg",
   },
   {
     title: "Quiz-Buzzer Round",
     description:
       "A fast-paced duo quiz competition where teams race to press the buzzer and answer questions correctly. Test your knowledge and quick thinking in this exciting quiz show format.",
     date: "October 31, 2024",
-    image: "/assets/keyboard.avif",
+    image: "/assets/quiz.jpg",
   },
 ];
 
@@ -112,7 +111,7 @@ const SlidingCards = () => {
             exit={{ x: -100, opacity: 0, scale: 0.85 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <Image
+            <img
               src={
                 events[
                   currentIndex === 0 ? events.length - 1 : currentIndex - 1
@@ -123,8 +122,6 @@ const SlidingCards = () => {
                   currentIndex === 0 ? events.length - 1 : currentIndex - 1
                 ].title
               }
-              width={400}
-              height={300}
               className="w-full h-48 object-cover rounded-lg shadow-lg"
             />
           </motion.div>
@@ -142,11 +139,9 @@ const SlidingCards = () => {
               boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.3)",
             }}
           >
-            <Image
+            <img
               src={events[currentIndex].image}
               alt={events[currentIndex].title}
-              width={400}
-              height={400}
               className="w-full h-64 object-cover rounded-lg mb-4 shadow-lg"
             />
             <h2 className="text-2xl font-semibold">
@@ -179,11 +174,9 @@ const SlidingCards = () => {
             exit={{ x: 100, opacity: 0, scale: 0.85 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
           >
-            <Image
+            <img
               src={events[(currentIndex + 1) % events.length].image}
               alt={events[(currentIndex + 1) % events.length].title}
-              width={400}
-              height={300}
               className="w-full h-48 object-cover rounded-lg shadow-lg"
             />
           </motion.div>

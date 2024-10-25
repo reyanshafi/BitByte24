@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 
 // Sample data for PS4 games
 const games = [
@@ -12,7 +11,7 @@ const games = [
   {
     id: 2,
     title: "WWE 2K18",
-    description: "SStep into the ring with WWE 2K18! Choose your favorite wrestling superstar and take down your opponents in an intense 1v1 battle. Bring your best moves and claim the championship title!.",
+    description: "Step into the ring with WWE 2K18! Choose your favorite wrestling superstar and take down your opponents in an intense 1v1 battle. Bring your best moves and claim the championship title!.",
     image: "/assets/wwe.jpg",
   },
   {
@@ -50,18 +49,16 @@ const PS5GamesDiagonal = () => {
 
       {/* Container for cards */}
       <div className="flex flex-col space-y-8 w-full max-w-4xl">
-        {games.map((game, index) => (
+        {games.map((game) => (
           <div
             key={game.id}
             className="relative w-full h-80 md:h-96 lg:h-80 overflow-hidden shadow-xl rounded-lg transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl"
           >
             {/* Image */}
-            <Image
+            <img
               src={game.image}
               alt={game.title}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
             />
             {/* Overlay with description, hidden until hover */}
             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 hover:opacity-100 transition-opacity duration-500">
