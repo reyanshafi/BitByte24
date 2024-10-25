@@ -18,6 +18,9 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'navcolor': "#040d13",
+        'buttonc' : "#185b6e",
+        'buttonhover' : "#399bac",
       },
     },
   },

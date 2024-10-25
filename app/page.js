@@ -30,7 +30,7 @@ const Home = () => {
       </div>
 
       {/* Simple animated tech icons above the footer */}
-      <div className="w-50 bg-gray-900 py-8 flex justify-center items-center overflow-hidden">
+      <div className="w-50 bg-slate-300 py-8 flex justify-center items-center overflow-hidden">
         <div className="flex space-x-10 animate-slide">
           <FaServer className="text-5xl text-blue-400 hover:text-blue-300 transition-all duration-300" />
           <FaDatabase className="text-5xl text-green-400 hover:text-green-300 transition-all duration-300" />
@@ -42,7 +42,7 @@ const Home = () => {
       </div>
 
       {/* Footer */}
-      <footer className="w-full bg-gray-800 text-gray-300 py-4">
+      <footer className="w-full bg-navcolor text-gray-300 py-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center px-6 space-y-4 sm:space-y-0">
           {/* Left side: Copyright info */}
           <p className="text-sm">&copy; {new Date().getFullYear()} BIT-BYTE.  All Rights Reserved.</p>

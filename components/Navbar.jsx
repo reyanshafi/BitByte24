@@ -8,7 +8,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full h-20 z-50 top-0 left-0 shadow-md border-b border-gray-200 dark:border-gray-600 backdrop-blur-lg bg-opacity-80">
+    <nav className="bg-white dark:bg-navcolor fixed w-full h-20 z-50 top-0 left-0 shadow-md border-b border-gray-900 dark:border-gray-900 backdrop-blur-lg bg-opacity-80">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto px-6 h-full">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse h-full">
           {/* Logo and Text */}
@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
-            className="text-white bg-blue-600 hover:bg-blue-700 hover:shadow-lg shadow-md font-medium rounded-full text-sm px-6 py-2 text-center transition duration-300 ease-in-out dark:bg-blue-600 dark:hover:bg-blue-700"
+            className="text-white bg-buttonc hover:bg-buttonhover hover:shadow-lg shadow-md font-medium rounded-full text-sm px-6 py-2 text-center transition duration-300 ease-in-out dark:bg-buttonc dark:hover:bg-buttonhover"
             onClick={onClick}
           >
             Register

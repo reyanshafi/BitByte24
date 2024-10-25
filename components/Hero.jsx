@@ -22,15 +22,15 @@ const Hero = () => {
 
   return (
     <div
-      className="mb-0 w-screen flex flex-col items-center z-10 bg-no-repeat bg-cover bg-center lg:bg-top md:bg-center sm:bg-bottom pt-20 pb-10 shadow-downward"
+      className="mb-0 w-screen flex flex-col items-center z-10 bg-no-repeat bg-cover bg-center lg:bg-top md:bg-center sm:bg-bottom pt-20 pb-20 shadow-downward"
       style={{
-        backgroundImage: 'url(/assets/bgx.png )',
+        backgroundImage: 'url(/assets/bg1.png )',
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
     >
       {/* Hero content */}
-      <div className="flex justify-center mb-4 md:mb-6 lg:mb-8">
+      {/* <div className="flex justify-center mb-4 md:mb-6 lg:mb-8">
         <Image
           src={logo}
           width={100}
@@ -38,10 +38,10 @@ const Hero = () => {
           alt="IUST logo"
           className="max-w-full h-auto"
         />
-      </div>
+      </div> */}
 
       <p className="font-iceberg text-center md:text-s text-white text-xl text-center sm:text-s">
-        Department of Computer Science & Engineering
+        Department of Computer Science & Engineering, IUST
       </p>
 
       <p className="text-blue-400 dark:text-gray-1500 text-xl font-semibold my-2 mx-auto mb-0 leading-relaxed">
@@ -57,7 +57,7 @@ const Hero = () => {
       <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 mt-10 pointer-events-auto w-full justify-evenly">
         <button
           onClick={handleGetStarted}
-          className="cursor-pointer inline-flex justify-center items-center py-3 px-5 sm:py-4 sm:px-6 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:shadow-md hover:shadow-blue-900 hover:bg-blue-700 dark:focus:ring-blue-800 z-20 sm:w-auto w-[90%] mx-auto"
+          className="cursor-pointer inline-flex justify-center items-center py-3 px-5 sm:py-4 sm:px-6 text-base font-medium text-center text-white rounded-lg bg-buttonc hover:shadow-md hover:shadow-blue-900 hover:bg-buttonhover dark:focus:ring-blue-800 z-20 sm:w-auto w-[90%] mx-auto"
         >
           Register Now
           <span>
